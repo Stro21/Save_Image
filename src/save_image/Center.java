@@ -55,8 +55,9 @@ public class Center {
     public String toString(){
         return "center=" + Double.toString(this.lat) + "," + Double.toString(this.lng);
     }
-    
+
     public String file_name(){
-        return Double.toString(this.lat) + "," + Double.toString(this.lng) + ".png";
+        return (this.lat < 0 ? "W" : "E") + String.format("%.5f", Math.abs(this.lat)) + (this.lng < 0 ? "S" : "N") + String.format("%.5f", Math.abs(this.lng));
+
     }
 }
