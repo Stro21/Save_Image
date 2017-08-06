@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 
 /**
@@ -54,12 +57,18 @@ public class Save_Image {
         }
         byte[] response = out.toByteArray();
         FileOutputStream fos;
-        
+        String path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
+        Path path = Paths.get(path_name);
+        if (Files.exists(path)){
             fos = new FileOutputStream("C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\mapa.png");
-        
-        fos.write(response);
-        fos.close();
-
+            fos.write(response);
+            fos.close();
+        }
+        else{
+            fos = new FileOutputStream("C:\\\\Users\\\\Eduardo Straub\\\\Documents\\\\NetBeansProjects\\\\Save_Image\\\\test\\\\images\\\\mapa.png");
+            fos.write(response);
+            fos.close();
+        }
 
     }
     
