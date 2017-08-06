@@ -53,9 +53,10 @@ public class Save_Image {
             }   out.close();
         }
         byte[] response = out.toByteArray();
-        
         FileOutputStream fos;
-        fos = new FileOutputStream("C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\mapa.png");
+        
+            fos = new FileOutputStream("C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\mapa.png");
+        
         fos.write(response);
         fos.close();
 
