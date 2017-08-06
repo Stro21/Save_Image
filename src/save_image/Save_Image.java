@@ -36,7 +36,7 @@ public class Save_Image {
         Size tamaño = new Size(500, 500);
         Map mapa = new Map(centro, 18, tamaño, "satellite", "AIzaSyBZJU70hMfKFnthdUFimKGLS17xkBntGWI");
         System.out.println(mapa.getUrl());
-
+        String image_name;
         Image image = null;
         try {
             URL url = new URL(mapa.getUrl());
@@ -59,13 +59,14 @@ public class Save_Image {
         FileOutputStream fos;
         String path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
         Path path = Paths.get(path_name);
+        image_name = mapa.getCenter().file_name();
         if (Files.exists(path)){
-            fos = new FileOutputStream("C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\mapa.png");
+            fos = new FileOutputStream("C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\" + image_name);
             fos.write(response);
             fos.close();
         }
         else{
-            fos = new FileOutputStream("C:\\\\Users\\\\Eduardo Straub\\\\Documents\\\\NetBeansProjects\\\\Save_Image\\\\test\\\\images\\\\mapa.png");
+            fos = new FileOutputStream("C:\\\\Users\\\\Eduardo Straub\\\\Documents\\\\NetBeansProjects\\\\Save_Image\\\\test\\\\images\\\\" + image_name);
             fos.write(response);
             fos.close();
         }

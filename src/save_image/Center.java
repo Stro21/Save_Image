@@ -47,7 +47,16 @@ public class Center {
         this.lng = lng;
     }
     
+    /**
+     *
+     * @return
+     */
+    @Override
     public String toString(){
         return "center=" + Double.toString(this.lat) + "," + Double.toString(this.lng);
+    }
+    
+    public String file_name(){
+        return Double.toString(this.lat) + "," + Double.toString(this.lng) + ".png";
     }
 }
