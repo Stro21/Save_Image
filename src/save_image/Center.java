@@ -57,7 +57,8 @@ public class Center {
     }
 
     public String file_name(){
-        return (this.lat < 0 ? "W" : "E") + String.format("%.5f", Math.abs(this.lat)) + (this.lng < 0 ? "S" : "N") + String.format("%.5f", Math.abs(this.lng));
+        return (this.lat < 0 ? "W" : "E") + String.format(Locale.US, "%.5f", Math.abs(this.lat)) + 
+               (this.lng < 0 ? "S" : "N") + String.format(Locale.US, "%.5f", Math.abs(this.lng));
 
     }
 }
