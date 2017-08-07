@@ -5,6 +5,8 @@
  */
 package save_image;
 
+import java.util.Locale;
+
 /**
  *
  * @author Eduardo Straub
@@ -57,7 +59,7 @@ public class Center {
     }
 
     public String file_name(){
-        return (this.lat < 0 ? "W" : "E") + String.format(Locale.US, "%.5f", Math.abs(this.lat)) + 
+        return (this.lat < 0 ? "W" : "E") + String.format(Locale.US, "%.5f", Math.abs(this.lat)) + "_" +
                (this.lng < 0 ? "S" : "N") + String.format(Locale.US, "%.5f", Math.abs(this.lng));
 
     }
