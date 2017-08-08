@@ -54,12 +54,13 @@ public class Save_Image {
         Path path = Paths.get(path_name);
         String image_name = mapa.nombreArchivo();
         if (Files.exists(path)){
-            fos = new FileOutputStream(path_name + image_name);
+            fos = new FileOutputStream(path_name + "\\" + image_name);
             fos.write(response);
             fos.close();
         }
         else{
-            fos = new FileOutputStream("C:\\Users\\Eduardo Straub\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\" + image_name);
+            path_name = "C:\\Users\\Eduardo Straub\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\";
+            fos = new FileOutputStream(path_name + image_name);
             fos.write(response);
             fos.close();
         }
