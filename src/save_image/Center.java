@@ -26,6 +26,11 @@ public class Center {
         this.lng = lng;
     }
     
+    public Center (Center center) {
+        this.lat = center.getLat();
+        this.lng = center.getLng();
+    }
+    
     /**
      * @return the lat
      */
@@ -60,7 +65,7 @@ public class Center {
      */
     @Override
     public String toString(){
-        return Double.toString(this.lat) + "," + Double.toString(this.lng);
+        return String.format(Locale.US, "%.5f", this.lat) + "," + String.format(Locale.US, "%.5f", this.lng);
     }
 
     public String file_name(){

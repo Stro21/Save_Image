@@ -31,14 +31,11 @@ public final class Map {
     private Size size;
     private String maptype;
     private String key;
-    private String url_name;
     private double elevation;
-    private URL url;
-    private FileOutputStream fos;
-    private byte[] response;
+    private byte[] image;
 
-    public void makeURL() {
-        this.url_name = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
+    public String makeURL() {
+        return "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
                 size.toString() + "&maptype=" + maptype + "&key=" + key;
     }
     
@@ -60,17 +57,13 @@ public final class Map {
      * @param size
      * @param maptype
      * @param key
-     * @throws IOException
      */
-    public Map(Center center, int zoom, Size size, String maptype, String key) throws IOException {
+    public Map(Center center, int zoom, Size size, String maptype, String key) {
         this.center = center;
         this.zoom = zoom;
         this.size = size;
         this.maptype = maptype;
         this.key = key;
-        makeURL();
-        setElevationMap();
-        Get_Image();
     }
 
     /**
@@ -99,7 +92,7 @@ public final class Map {
      * @throws IOException
      */
     public void Get_Image() throws IOException{
-        url = new URL(url_name);
+        URL url = new URL(makeURL());
         ByteArrayOutputStream out;
         try (InputStream in = new BufferedInputStream(url.openStream())) {
             out = new ByteArrayOutputStream();
@@ -110,7 +103,7 @@ public final class Map {
             }   
             out.close();
         }
-        response = out.toByteArray();
+        image = out.toByteArray();
     }
     
     /**
@@ -122,16 +115,33 @@ public final class Map {
         String path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
         Path path = Paths.get(path_name);
         String image_name = nombreArchivo();
+        FileOutputStream fos;
         if (Files.exists(path)){
             fos = new FileOutputStream(path_name + "\\" + image_name);
-            fos.write(response);
+            fos.write(image);
             fos.close();
         }
         else{
             path_name = "C:\\Users\\Eduardo Straub\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\";
             fos = new FileOutputStream(path_name + image_name);
-            fos.write(response);
+            fos.write(image);
             fos.close();
         }
     }
+
+    /**
+     * @param center the center to set
+     */
+    public void setCenter(Center center) {
+        this.center = center;
+    }
+    
+    /**
+     * @throws IOException 
+     */
+    public void getGoogleData() throws IOException {
+        setElevationMap();
+        Get_Image();
+    }
+    
 }
