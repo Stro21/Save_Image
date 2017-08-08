@@ -25,7 +25,7 @@ public final class Map {
     private String maptype;
     private String key;
     private String url;
-    private double elevation = -1000.0; // invalid elevation
+    private double elevation;
 
     public void makeURL() {
         this.url = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
@@ -121,13 +121,6 @@ public final class Map {
     }
 
     /**
-     * @param url the url to set
-     */
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    /**
      *
      * @param center
      * @param zoom
@@ -172,13 +165,6 @@ public final class Map {
      */
     public double getElevation() {
         return elevation;
-    }
-
-    /**
-     * @param elevation the elevation to set
-     */
-    public void setElevation(double elevation) {
-        this.elevation = elevation;
     }
     
 }
