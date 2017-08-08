@@ -5,7 +5,6 @@
  */
 package save_image;
 
-import java.awt.Image;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +16,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.imageio.ImageIO;
+
 
 /**
  *
@@ -33,16 +32,10 @@ public class Save_Image {
     public static void main(String[] args) throws FileNotFoundException, MalformedURLException, IOException {
         // TODO code application logic here
         Center centro = new Center (-33.2481, -70.05066);
+        int zoom = 18;
         Size tamaño = new Size(500, 500);
-        Map mapa = new Map(centro, 18, tamaño, "satellite", "AIzaSyBZJU70hMfKFnthdUFimKGLS17xkBntGWI");
-        System.out.println(mapa.getUrl());
-        String image_name;
-        Image image = null;
-        try {
-            URL url = new URL(mapa.getUrl());
-            image = ImageIO.read(url);
-        } catch (IOException e) {
-        }
+        String googleKey = "AIzaSyBZJU70hMfKFnthdUFimKGLS17xkBntGWI";
+        Map mapa = new Map(centro, zoom, tamaño, "satellite", googleKey);
         
         URL url = new URL(mapa.getUrl());
         ByteArrayOutputStream out;
@@ -50,16 +43,16 @@ public class Save_Image {
             out = new ByteArrayOutputStream();
             byte[] buf = new byte[1024];
             int n = 0;
-            while (-1!=(n=in.read(buf)))
-            {
+            while (-1!=(n=in.read(buf))) {
                 out.write(buf, 0, n);
-            }   out.close();
+            }   
+            out.close();
         }
         byte[] response = out.toByteArray();
         FileOutputStream fos;
         String path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
         Path path = Paths.get(path_name);
-        image_name = mapa.nombreArchivo();
+        String image_name = mapa.nombreArchivo();
         if (Files.exists(path)){
             fos = new FileOutputStream("C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\" + image_name);
             fos.write(response);

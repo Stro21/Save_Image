@@ -16,6 +16,11 @@ public class Center {
     private double lat;
     private double lng;
 
+    /**
+     *
+     * @param lat
+     * @param lng
+     */
     public Center(double lat, double lng) {
         this.lat = lat;
         this.lng = lng;
@@ -55,7 +60,7 @@ public class Center {
      */
     @Override
     public String toString(){
-        return "center=" + Double.toString(this.lat) + "," + Double.toString(this.lng);
+        return Double.toString(this.lat) + "," + Double.toString(this.lng);
     }
 
     public String file_name(){
