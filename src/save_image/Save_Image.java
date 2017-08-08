@@ -5,14 +5,10 @@
  */
 package save_image;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,18 +33,7 @@ public class Save_Image {
         String googleKey = "AIzaSyBZJU70hMfKFnthdUFimKGLS17xkBntGWI";
         Map mapa = new Map(centro, zoom, tamaño, "satellite", googleKey);
         
-        URL url = new URL(mapa.getUrl());
-        ByteArrayOutputStream out;
-        try (InputStream in = new BufferedInputStream(url.openStream())) {
-            out = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int n = 0;
-            while (-1!=(n=in.read(buf))) {
-                out.write(buf, 0, n);
-            }   
-            out.close();
-        }
-        byte[] response = out.toByteArray();
+        byte[] response = mapa.get_image();
         FileOutputStream fos;
         String path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
         Path path = Paths.get(path_name);

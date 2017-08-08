@@ -5,8 +5,11 @@
  */
 package save_image;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -23,11 +26,12 @@ public final class Map {
     private Size size;
     private String maptype;
     private String key;
-    private String url;
+    private String url_path;
     private double elevation;
+    private URL url;
 
     public void makeURL() {
-        this.url = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
+        this.url_path = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
                 size.toString() + "&maptype=" + maptype + "&key=" + key;
     }
     
@@ -36,7 +40,7 @@ public final class Map {
      * @return the name of the file.
      */
     public String nombreArchivo() {
-        if(this.getElevation() >= 2500)
+        if(elevation >= 2500)
             return "m" + center.file_name() + ".png";
         else
             return "v" + center.file_name() + ".png";
@@ -47,13 +51,6 @@ public final class Map {
      */
     public Center getCenter() {
         return center;
-    }
-
-    /**
-     * @return the url
-     */
-    public String getUrl() {
-        return url;
     }
 
     /**
@@ -81,7 +78,7 @@ public final class Map {
      * @throws IOException
      */
     public void setElevationMap() throws MalformedURLException, IOException{
-        String elevationUrlText = "https://maps.googleapis.com/maps/api/elevation/json?locations=" + getCenter().toString() + "&key=" + this.key;
+        String elevationUrlText = "https://maps.googleapis.com/maps/api/elevation/json?locations=" + center.toString() + "&key=" + key;
         URL elevationUrl = new URL(elevationUrlText);
         HttpURLConnection conn = (HttpURLConnection) elevationUrl.openConnection();
         conn.setRequestMethod("GET");
@@ -96,11 +93,18 @@ public final class Map {
         elevation = Double.parseDouble(outputString.substring(posStart, posEnd));
     }
     
-    /**
-     * @return the elevation
-     */
-    public double getElevation() {
-        return elevation;
+    public byte[] get_image() throws IOException{
+        url = new URL(url_path);
+        ByteArrayOutputStream out;
+        try (InputStream in = new BufferedInputStream(url.openStream())) {
+            out = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            int n = 0;
+            while (-1!=(n=in.read(buf))) {
+                out.write(buf, 0, n);
+            }   
+            out.close();
+        }
+        return out.toByteArray();
     }
-    
 }
