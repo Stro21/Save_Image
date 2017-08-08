@@ -13,7 +13,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
-
 /**
  *
  * @author Eduardo Straub
@@ -48,69 +47,6 @@ public final class Map {
      */
     public Center getCenter() {
         return center;
-    }
-
-    /**
-     * @param center the center to set
-     */
-    public void setCenter(Center center) {
-        this.center = center;
-    }
-
-    /**
-     * @return the zoom
-     */
-    public int getZoom() {
-        return zoom;
-    }
-
-    /**
-     * @param zoom the zoom to set
-     */
-    public void setZoom(int zoom) {
-        this.zoom = zoom;
-    }
-
-    /**
-     * @return the size
-     */
-    public Size getSize() {
-        return size;
-    }
-
-    /**
-     * @param size the size to set
-     */
-    public void setSize(Size size) {
-        this.size = size;
-    }
-
-    /**
-     * @return the maptype
-     */
-    public String getMaptype() {
-        return maptype;
-    }
-
-    /**
-     * @param maptype the maptype to set
-     */
-    public void setMaptype(String maptype) {
-        this.maptype = maptype;
-    }
-
-    /**
-     * @return the key
-     */
-    public String getKey() {
-        return key;
-    }
-
-    /**
-     * @param key the key to set
-     */
-    public void setKey(String key) {
-        this.key = key;
     }
 
     /**
