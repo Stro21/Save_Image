@@ -34,7 +34,6 @@ public final class Map {
     private String url_name;
     private double elevation;
     private URL url;
-    private String path_name;
     private FileOutputStream fos;
     private byte[] response;
 
@@ -71,6 +70,7 @@ public final class Map {
         this.key = key;
         makeURL();
         setElevationMap();
+        Get_Image();
     }
 
     /**
@@ -119,7 +119,7 @@ public final class Map {
      * @throws IOException
      */
     public void Save_Image() throws FileNotFoundException, IOException{
-        path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
+        String path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
         Path path = Paths.get(path_name);
         String image_name = nombreArchivo();
         if (Files.exists(path)){

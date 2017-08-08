@@ -25,9 +25,7 @@ public class Save_Image {
         int zoom = 18;
         Size tamaño = new Size(500, 500);
         String googleKey = "AIzaSyBZJU70hMfKFnthdUFimKGLS17xkBntGWI";
-        Map mapa = new Map(centro, zoom, tamaño, "satellite", googleKey);
-        //Creates the map.
-        mapa.Get_Image(); //Get an image from google maps.
+        Map mapa = new Map(centro, zoom, tamaño, "satellite", googleKey); //Creates the map.
         mapa.Save_Image(); //Save image file in a folder.
     }
     
