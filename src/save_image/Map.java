@@ -8,12 +8,17 @@ package save_image;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 /**
@@ -26,12 +31,15 @@ public final class Map {
     private Size size;
     private String maptype;
     private String key;
-    private String url_path;
+    private String url_name;
     private double elevation;
     private URL url;
+    private String path_name;
+    private FileOutputStream fos;
+    private byte[] response;
 
     public void makeURL() {
-        this.url_path = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
+        this.url_name = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
                 size.toString() + "&maptype=" + maptype + "&key=" + key;
     }
     
@@ -44,13 +52,6 @@ public final class Map {
             return "m" + center.file_name() + ".png";
         else
             return "v" + center.file_name() + ".png";
-    }
-
-    /**
-     * @return the center
-     */
-    public Center getCenter() {
-        return center;
     }
 
     /**
@@ -93,8 +94,12 @@ public final class Map {
         elevation = Double.parseDouble(outputString.substring(posStart, posEnd));
     }
     
-    public byte[] get_image() throws IOException{
-        url = new URL(url_path);
+    /**
+     *
+     * @throws IOException
+     */
+    public void Get_Image() throws IOException{
+        url = new URL(url_name);
         ByteArrayOutputStream out;
         try (InputStream in = new BufferedInputStream(url.openStream())) {
             out = new ByteArrayOutputStream();
@@ -105,6 +110,28 @@ public final class Map {
             }   
             out.close();
         }
-        return out.toByteArray();
+        response = out.toByteArray();
+    }
+    
+    /**
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public void Save_Image() throws FileNotFoundException, IOException{
+        path_name = "C:\\Users\\eduar\\Documents\\NetBeansProjects\\Save_Image\\test\\images";
+        Path path = Paths.get(path_name);
+        String image_name = nombreArchivo();
+        if (Files.exists(path)){
+            fos = new FileOutputStream(path_name + "\\" + image_name);
+            fos.write(response);
+            fos.close();
+        }
+        else{
+            path_name = "C:\\Users\\Eduardo Straub\\Documents\\NetBeansProjects\\Save_Image\\test\\images\\";
+            fos = new FileOutputStream(path_name + image_name);
+            fos.write(response);
+            fos.close();
+        }
     }
 }
