@@ -20,13 +20,13 @@ public class Save_Image {
      * @throws java.net.MalformedURLException
      */
     public static void main(String[] args) throws IOException {
-        final Center southWestArea = new Center(-33.25456025, -70.05838476); 
-        final Center northEastArea = new Center(-33.24648494, -70.04872881);
-        final Double stepLat = 0.001615063;
-        final Double stepLng = 0.00193119;
+        final Center southWestArea = new Center(-33.70387, -70.19607); 
+        final Center northEastArea = new Center(-33.67213, -70.15793);
+        final Double stepLat = 0.00396762;
+        final Double stepLng = 0.004768372;
         Center center = new Center(southWestArea);
         int zoom = 18;
-        Size tamaño = new Size(500, 500);
+        Size tamaño = new Size(1000, 1000);
         String googleKey = "AIzaSyBZJU70hMfKFnthdUFimKGLS17xkBntGWI";
         Map mapa = new Map(center, zoom, tamaño, "satellite", googleKey); //Creates the map.
         System.out.println("Init: Center " + center);
