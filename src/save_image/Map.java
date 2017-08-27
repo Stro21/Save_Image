@@ -45,7 +45,7 @@ public final class Map {
      * @return the name of the file.
      */
     public String nombreArchivo() {
-        if(elevation >= 2500)
+        if(elevation >= 3000)
             return "m" + center.file_name() + ".png";
         else
             return "v" + center.file_name() + ".png";
