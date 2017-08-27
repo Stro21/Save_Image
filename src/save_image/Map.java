@@ -29,14 +29,15 @@ public final class Map {
     private Center center;
     private int zoom;
     private Size size;
+    private int scale;
     private String maptype;
     private String key;
     private double elevation;
     private byte[] image;
 
     public String makeURL() {
-        return "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) + "&" + 
-                size.toString() + "&maptype=" + maptype + "&key=" + key;
+        return "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + center.toString() + "&zoom=" + Integer.toString(zoom) +  
+                size.toString() + "&scale=" + Integer.toString(scale) + "&maptype=" + maptype + "&key=" + key;
     }
     
     /**
@@ -57,13 +58,15 @@ public final class Map {
      * @param size
      * @param maptype
      * @param key
+     * @param scale
      */
-    public Map(Center center, int zoom, Size size, String maptype, String key) {
+    public Map(Center center, int zoom, Size size, String maptype, String key, int scale) {
         this.center = center;
         this.zoom = zoom;
         this.size = size;
         this.maptype = maptype;
         this.key = key;
+        this.scale = scale;
     }
 
     /**

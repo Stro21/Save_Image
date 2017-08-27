@@ -49,6 +49,6 @@ public class Size {
     
     @Override
     public String toString(){
-        return "size=" + Integer.toString(this.height) + "x" + Integer.toString(width);
+        return "&size=" + Integer.toString(this.height) + "x" + Integer.toString(width);
     }
 }
